@@ -44,7 +44,10 @@
             <!-- Header -->
             <header class="app-header">
                 <h2 id="header-title" data-i18n="nav_home">Home</h2>
-                <div class="header-actions">
+                <div class="header-actions" style="display: flex; gap: 10px; align-items: center;">
+                    <button class="icon-btn stagger-item glow-effect" style="color: var(--primary-color);" onclick="openOverlay('ai-overlay')">
+                        <i class="ri-magic-fill" style="font-size: 20px;"></i>
+                    </button>
                     <button class="icon-btn stagger-item" id="notifications-btn">
                         <i class="ri-notification-3-line"></i>
                         <span class="badge">3</span>
@@ -305,11 +308,7 @@
                 </section>
 
             </main>
-            
-            <!-- Global AI FAB -->
-            <button class="ai-fab glow-effect" onclick="openOverlay('ai-overlay')">
-                <i class="ri-magic-fill"></i>
-            </button>
+
 
             <!-- Bottom Navigation (Reordered for Chat First) -->
             <nav class="bottom-nav">
