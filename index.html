@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>New Bonds</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Splash Screen -->
+        <div id="splash-screen" class="splash-screen">
+            <img src="C:/Users/aarth/.gemini/antigravity/brain/80e16c57-7e0e-414f-9b85-8db21021d9d9/app_icon_1772982109310.png" alt="New Bonds Icon" class="splash-img">
+            <h1 class="splash-title">New Bonds</h1>
+        </div>
+
+        <!-- Auth View -->
+        <main id="auth-view" class="view active">
+            <div class="auth-wrapper glass-panel">
+                <div class="logo-area">
+                    <img src="C:/Users/aarth/.gemini/antigravity/brain/80e16c57-7e0e-414f-9b85-8db21021d9d9/app_icon_1772982109310.png" alt="New Bonds Icon" class="app-icon-img">
+                    <h1 data-i18n="app_name">New Bonds</h1>
+                    <p data-i18n="app_tagline">Your campus, in your pocket.</p>
+                </div>
+                <form id="login-form">
+                    <div class="input-group">
+                        <i class="ri-mail-line"></i>
+                        <input type="text" placeholder="Email or Phone Number" id="login-email" data-i18n-placeholder="email_placeholder" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="ri-lock-password-line"></i>
+                        <input type="password" placeholder="Password" id="login-pass" data-i18n-placeholder="pass_placeholder" required>
+                    </div>
+                    <button type="submit" class="btn-primary" data-i18n="login_btn">Log In</button>
+                    <p class="auth-switch"><span data-i18n="no_account">Don't have an account?</span> <a href="#" id="to-signup" data-i18n="signup">Sign up</a></p>
+                </form>
+            </div>
+        </main>
+
+        <!-- Main App Wrapper (visible after login) -->
+        <div id="main-app" class="hidden">
+            <!-- Header -->
+            <header class="app-header">
+                <h2 id="header-title" data-i18n="nav_home">Home</h2>
+                <div class="header-actions">
+                    <button class="icon-btn stagger-item" id="notifications-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Views -->
+            <main class="views-container">
+                
+                <!-- Home Dashboard -->
+                <section id="home-view" class="view active">
+                    <div class="section-title stagger-item" data-i18n="latest_activity">Latest Activity</div>
+                    
+                    <div class="horizontal-scroll stagger-item">
+                        <div class="channel-card">
+                            <div class="channel-icon"><i class="ri-code-box-line"></i></div>
+                            <div class="channel-info">
+                                <h4>Programming</h4>
+                                <span>24 online</span>
+                            </div>
+                        </div>
+                        <div class="channel-card">
+                            <div class="channel-icon"><i class="ri-film-line"></i></div>
+                            <div class="channel-info">
+                                <h4>Movies & TV</h4>
+                                <span>120 online</span>
+                            </div>
+                        </div>
+                        <div class="channel-card">
+                            <div class="channel-icon"><i class="ri-robot-line"></i></div>
+                            <div class="channel-info">
+                                <h4>AI & Tech</h4>
+                                <span>45 online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Recent Group Messages</div>
+                    <div class="list-item" onclick="openChat('CSE 3rd Year')">
+                        <div class="avatar bg-blue">C3</div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>CSE 3rd Year</h4>
+                                <span class="time">10:42 AM</span>
+                            </div>
+                            <p class="preview"><strong>Rahul:</strong> Has anyone finished the OS assignment?</p>
+                        </div>
+                    </div>
+                    <div class="list-item" onclick="openChat('Project Alpha')">
+                        <div class="avatar bg-purple">PA</div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>Project Alpha</h4>
+                                <span class="time">Yesterday</span>
+                            </div>
+                            <p class="preview"><strong>You:</strong> I'll upload the final doc tonight.</p>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Trending Confessions</div>
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="anon-avatar"><i class="ri-ghost-smile-line"></i></div>
+                            <div>
+                                <h4>Anonymous Tiger</h4>
+                                <span class="time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            I accidentally called the strict math professor "mom" today. I need to transfer to a new college immediately. 😭
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><i class="ri-heart-line"></i> 245</button>
+                            <button class="action-btn"><i class="ri-chat-1-line"></i> 42</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Groups View -->
+                <section id="groups-view" class="view hidden">
+                    <div class="tabs">
+                        <button class="tab active">My Groups</button>
+                        <button class="tab">Study Groups</button>
+                    </div>
+                    
+                    <div class="groups-list">
+                        <div class="list-item" onclick="openChat('CSE 3rd Year')">
+                            <div class="avatar bg-blue">C3</div>
+                            <div class="item-content">
+                                <div class="item-header">
+                                    <h4>CSE 3rd Year</h4>
+                                    <span class="badge-count">2</span>
+                                </div>
+                                <p class="preview">Rahul: Has anyone finished the OS...</p>
+                            </div>
+                        </div>
+                        <div class="list-item" onclick="openChat('Web Dev Club')">
+                            <div class="avatar bg-orange">WD</div>
+                            <div class="item-content">
+                                <div class="item-header">
+                                    <h4>Web Dev Club</h4>
+                                </div>
+                                <p class="preview">Sneha shared a link.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="fab" id="add-friend-fab" onclick="openOverlay('add-friend-overlay')"><i class="ri-add-line"></i></button>
+                </section>
+
+                <!-- Feed View -->
+                <section id="feed-view" class="view hidden">
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="anon-avatar"><i class="ri-ghost-line"></i></div>
+                            <div>
+                                <h4>Anonymous Bear</h4>
+                                <span class="time">Just now</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Library AC is freezing again. Bring a jacket if you're coming to the 2nd floor! 🥶
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><i class="ri-heart-line"></i> 12</button>
+                            <button class="action-btn"><i class="ri-chat-1-line"></i> 3</button>
+                        </div>
+                    </div>
+                    
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="anon-avatar"><i class="ri-ghost-smile-line"></i></div>
+                            <div>
+                                <h4>Anonymous Tiger</h4>
+                                <span class="time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            I accidentally called the strict math professor "mom" today. I need to transfer to a new college immediately. 😭
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn liked"><i class="ri-heart-fill"></i> 245</button>
+                            <button class="action-btn"><i class="ri-chat-1-line"></i> 42</button>
+                        </div>
+                    </div>
+                    
+                    <button class="fab"><i class="ri-pencil-line"></i></button>
+                </section>
+
+                <!-- Voice Rooms View -->
+                <section id="voice-view" class="view hidden">
+                    <div class="room-card live" onclick="joinRoom('Late Night Coding')">
+                        <div class="room-tags">
+                            <span class="tag live-tag">LIVE</span>
+                            <span class="tag">Programming</span>
+                        </div>
+                        <h3>Late Night Coding ☕💻</h3>
+                        <div class="room-speakers">
+                            <div class="speakers-avatars">
+                                <img src="https://i.pravatar.cc/100?img=11" alt="avatar">
+                                <img src="https://i.pravatar.cc/100?img=12" alt="avatar">
+                                <img src="https://i.pravatar.cc/100?img=13" alt="avatar">
+                            </div>
+                            <div class="speakers-count">
+                                <span><i class="ri-mic-fill"></i> 4</span>
+                                <span><i class="ri-user-smile-fill"></i> 32</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="room-card live" onclick="joinRoom('Exam Prep')">
+                        <div class="room-tags">
+                            <span class="tag live-tag">LIVE</span>
+                            <span class="tag">Study</span>
+                        </div>
+                        <h3>Data Structures Exam Prep 📚</h3>
+                        <div class="room-speakers">
+                            <div class="speakers-avatars">
+                                <img src="https://i.pravatar.cc/100?img=33" alt="avatar">
+                                <img src="https://i.pravatar.cc/100?img=34" alt="avatar">
+                            </div>
+                            <div class="speakers-count">
+                                <span><i class="ri-mic-fill"></i> 2</span>
+                                <span><i class="ri-user-smile-fill"></i> 18</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="fab"><i class="ri-mic-line"></i></button>
+                </section>
+
+                <!-- Profile View -->
+                <section id="profile-view" class="view hidden">
+                    <div class="profile-header">
+                        <img src="https://i.pravatar.cc/150?img=68" alt="Profile" class="profile-pic">
+                        <h2>Alex Johnson</h2>
+                        <p class="subtitle">Computer Science Eng. • 3rd Year</p>
+                    </div>
+                    
+                    <div class="settings-list">
+                        <div class="setting-item" onclick="openOverlay('saved-chats-overlay')">
+                            <div class="setting-icon"><i class="ri-bookmark-line"></i></div>
+                            <div class="setting-text" data-i18n="saved_chats">Saved Chats</div>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </div>
+                        <div class="setting-item" onclick="openOverlay('profile-settings-overlay')">
+                            <div class="setting-icon"><i class="ri-shield-check-fill text-success"></i></div>
+                            <div class="setting-text" data-i18n="account_settings">Security & Settings</div>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-icon"><i class="ri-global-line"></i></div>
+                            <div class="setting-text" data-i18n="language">Language</div>
+                            <select id="language-select" class="lang-dropdown">
+                                <option value="en">English</option>
+                                <option value="ta">தமிழ் (Tamil)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-icon"><i class="ri-moon-line"></i></div>
+                            <div class="setting-text" data-i18n="dark_mode">Dark Mode</div>
+                            <label class="switch">
+                                <input type="checkbox" id="theme-toggle" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item text-danger" id="logout-btn">
+                            <div class="setting-icon"><i class="ri-logout-box-r-line"></i></div>
+                            <div class="setting-text" data-i18n="logout">Log Out</div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+            
+            <!-- Global AI FAB -->
+            <button class="ai-fab glow-effect" onclick="openOverlay('ai-overlay')">
+                <i class="ri-magic-fill"></i>
+            </button>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <a href="#" class="nav-item active" data-target="home-view">
+                    <i class="ri-home-5-line"></i>
+                    <i class="ri-home-5-fill active-icon"></i>
+                    <span data-i18n="nav_home">Home</span>
+                </a>
+                <a href="#" class="nav-item" data-target="groups-view">
+                    <i class="ri-chat-smile-3-line"></i>
+                    <i class="ri-chat-smile-3-fill active-icon"></i>
+                    <span data-i18n="nav_groups">Groups</span>
+                </a>
+                <a href="#" class="nav-item" data-target="feed-view">
+                    <i class="ri-fire-line"></i>
+                    <i class="ri-fire-fill active-icon"></i>
+                    <span data-i18n="nav_feed">Feed</span>
+                </a>
+                <a href="#" class="nav-item" data-target="voice-view">
+                    <i class="ri-mic-line"></i>
+                    <i class="ri-mic-fill active-icon"></i>
+                    <span data-i18n="nav_voice">Voice</span>
+                </a>
+                <a href="#" class="nav-item" data-target="profile-view">
+                    <i class="ri-user-3-line"></i>
+                    <i class="ri-user-3-fill active-icon"></i>
+                    <span data-i18n="nav_profile">Profile</span>
+                </a>
+            </nav>
+            
+            <!-- Chat Overlay View -->
+            <div id="chat-overlay" class="overlay-view hidden">
+                <header class="app-header glass-header">
+                    <div class="header-left">
+                        <button class="icon-btn" id="close-chat-btn"><i class="ri-arrow-left-line"></i></button>
+                        <div class="chat-header-info">
+                            <h3 id="chat-title">Group Name</h3>
+                            <span class="e2e-status"><i class="ri-lock-fill"></i> End-to-End Encrypted</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn" onclick="openOverlay('phone-call-overlay')"><i class="ri-phone-fill"></i></button>
+                        <button class="icon-btn"><i class="ri-more-2-fill"></i></button>
+                    </div>
+                </header>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message-bubble received">
+                        <span class="sender-name">Rahul</span>
+                        Has anyone finished the OS assignment?
+                        <div class="msg-footer">
+                            <span class="msg-time">10:41 AM</span>
+                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="message-bubble received">
+                        <span class="sender-name">Sneha</span>
+                        I'm still on question 2. It's so tough!
+                        <div class="msg-footer">
+                            <span class="msg-time">10:42 AM</span>
+                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="message-bubble sent">
+                        I can share my notes if that helps.
+                        <div class="msg-footer">
+                            <span class="msg-time">10:43 AM <i class="ri-check-double-line"></i></span>
+                            <button class="bookmark-btn"><i class="ri-bookmark-line"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <div id="attachment-menu" class="attachment-menu hidden glass-panel">
+                        <button class="attach-item" id="btn-camera" onclick="document.getElementById('camera-input').click()">
+                            <div class="attach-icon bg-purple"><i class="ri-camera-fill"></i></div>
+                            <span>Camera</span>
+                        </button>
+                        <button class="attach-item" id="btn-gallery" onclick="document.getElementById('gallery-input').click()">
+                            <div class="attach-icon bg-blue"><i class="ri-image-2-fill"></i></div>
+                            <span>Gallery</span>
+                        </button>
+                        <button class="attach-item" id="btn-document">
+                            <div class="attach-icon bg-orange"><i class="ri-file-text-fill"></i></div>
+                            <span>Document</span>
+                        </button>
+                    </div>
+                    <input type="file" id="camera-input" accept="image/*,video/*" capture="environment" class="hidden">
+                    <input type="file" id="gallery-input" accept="image/*,video/*" class="hidden">
+                    <button class="icon-btn" id="attach-btn"><i class="ri-attachment-2"></i></button>
+                    <input type="text" placeholder="Message..." id="msg-input">
+                    <button class="icon-btn primary-text" id="send-msg-btn"><i class="ri-send-plane-fill"></i></button>
+                </div>
+            </div>
+
+            <!-- Voice Room Overlay -->
+            <div id="room-overlay" class="overlay-view hidden bg-darker">
+                <header class="app-header bg-transparent">
+                    <button class="icon-btn" id="leave-room-btn"><i class="ri-arrow-down-s-line"></i></button>
+                    <div class="header-actions">
+                        <button class="btn-outline-danger">Leave</button>
+                    </div>
+                </header>
+                <div class="room-stage">
+                    <h2 id="room-title">Late Night Coding ☕💻</h2>
+                    
+                    <div class="speakers-grid">
+                        <div class="speaker active-speaking">
+                            <div class="speaker-avatar">
+                                <img src="https://i.pravatar.cc/150?img=11" alt="Speaker">
+                                <div class="mic-status on"><i class="ri-mic-fill"></i></div>
+                            </div>
+                            <span>Alex</span>
+                        </div>
+                        <div class="speaker">
+                            <div class="speaker-avatar">
+                                <img src="https://i.pravatar.cc/150?img=12" alt="Speaker">
+                                <div class="mic-status off"><i class="ri-mic-off-fill"></i></div>
+                            </div>
+                            <span>Rahul</span>
+                        </div>
+                        <div class="speaker">
+                            <div class="speaker-avatar">
+                                <img src="https://i.pravatar.cc/150?img=13" alt="Speaker">
+                                <div class="mic-status off"><i class="ri-mic-off-fill"></i></div>
+                            </div>
+                            <span>Sneha</span>
+                        </div>
+                    </div>
+                    
+                    <div class="audience-section">
+                        <h4>Listeners (32)</h4>
+                        <div class="audience-grid">
+                            <img src="https://i.pravatar.cc/100?img=21" alt="Viewer">
+                            <img src="https://i.pravatar.cc/100?img=22" alt="Viewer">
+                            <img src="https://i.pravatar.cc/100?img=23" alt="Viewer">
+                            <img src="https://i.pravatar.cc/100?img=24" alt="Viewer">
+                            <div class="more-viewers">+28</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-controls glass-panel">
+                    <button class="control-btn"><i class="ri-hand-line"></i></button>
+                    <button class="control-btn main-control"><i class="ri-mic-off-fill"></i></button>
+                    <button class="control-btn"><i class="ri-chat-3-line"></i></button>
+                </div>
+            </div>
+
+            <!-- Phone Call Overlay -->
+            <div id="phone-call-overlay" class="overlay-view hidden call-bg">
+                <div class="call-header">
+                    <span class="e2e-status"><i class="ri-lock-fill"></i> End-to-End Encrypted</span>
+                    <button class="icon-btn" onclick="closeOverlay('phone-call-overlay')"><i class="ri-arrow-down-s-line"></i></button>
+                </div>
+                
+                <div class="call-info">
+                    <div class="call-avatar glow-effect">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="Caller">
+                    </div>
+                    <h2 class="caller-name">Rahul</h2>
+                    <p class="call-status">02:14</p>
+                </div>
+
+                <div class="call-actions glass-panel">
+                    <button class="call-btn"><i class="ri-volume-up-fill"></i></button>
+                    <button class="call-btn"><i class="ri-vidicon-line"></i></button>
+                    <button class="call-btn"><i class="ri-mic-off-fill"></i></button>
+                    <button class="call-btn end-call" onclick="closeOverlay('phone-call-overlay')"><i class="ri-phone-fill"></i></button>
+                </div>
+            </div>
+
+            <!-- Saved Chats Overlay -->
+            <div id="saved-chats-overlay" class="overlay-view hidden">
+                <header class="app-header glass-header">
+                    <div class="header-left">
+                        <button class="icon-btn" onclick="closeOverlay('saved-chats-overlay')"><i class="ri-arrow-left-line"></i></button>
+                        <h3>Saved Messages</h3>
+                    </div>
+                </header>
+                <div class="views-container list-view" id="saved-messages-list">
+                    <!-- Saved messages will be populated here via JS -->
+                    <div class="empty-state">
+                        <i class="ri-bookmark-line"></i>
+                        <p>No saved messages yet</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Settings Overlay -->
+            <div id="profile-settings-overlay" class="overlay-view hidden">
+                <header class="app-header glass-header">
+                    <div class="header-left">
+                        <button class="icon-btn" onclick="closeOverlay('profile-settings-overlay')"><i class="ri-arrow-left-line"></i></button>
+                        <h3 data-i18n="security_settings">Security & Privacy</h3>
+                    </div>
+                </header>
+                <div class="views-container list-view">
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-icon"><i class="ri-shield-keyhole-line text-success"></i></div>
+                            <div class="setting-text">
+                                <span data-i18n="two_step_verif" style="display:block">Two-Step Verification</span>
+                                <small class="text-success" style="font-size:11px">Recommended</small>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-icon"><i class="ri-fingerprint-line text-success"></i></div>
+                            <div class="setting-text">
+                                <span data-i18n="app_lock" style="display:block">App Lock (Biometrics)</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-icon"><i class="ri-macbook-line"></i></div>
+                            <div class="setting-text" data-i18n="active_sessions">Active Sessions (1)</div>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-icon"><i class="ri-database-2-line"></i></div>
+                            <div class="setting-text" data-i18n="storage">Storage and Data</div>
+                            <i class="ri-arrow-right-s-line"></i>
+                        </div>
+                    </div>
+                    <div class="security-badge">
+                        <i class="ri-shield-check-fill text-success"></i>
+                        <span data-i18n="secured_by">Secured by New Bonds E2E</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Chat Overlay -->
+            <div id="ai-overlay" class="overlay-view hidden">
+                <header class="app-header glass-header ai-header">
+                    <div class="header-left">
+                        <button class="icon-btn" onclick="closeOverlay('ai-overlay')"><i class="ri-arrow-left-line"></i></button>
+                        <div class="chat-header-info">
+                            <h3>Magic AI</h3>
+                            <span class="text-success"><i class="ri-magic-line"></i> Online</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn"><i class="ri-refresh-line"></i></button>
+                    </div>
+                </header>
+                
+                <div class="chat-messages" id="ai-chat-messages">
+                    <div class="message-bubble received ai-msg">
+                        <span class="sender-name"><i class="ri-magic-fill"></i> Magic AI</span>
+                        <span data-i18n="ai_greeting">Hello! I'm your campus assistant. How can I help you today?</span>
+                        <div class="msg-footer"><span class="msg-time">Just now</span></div>
+                    </div>
+                    
+                    <div class="ai-chips">
+                        <button class="ai-chip" onclick="sendAiMsg('Summarize my unread messages')" data-i18n="ai_chip_1">Summarize unread info</button>
+                        <button class="ai-chip" onclick="sendAiMsg('Find active study groups')" data-i18n="ai_chip_2">Find active study groups</button>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area ai-input-area border-glow">
+                    <input type="text" id="ai-msg-input" placeholder="Ask AI..." data-i18n-placeholder="ai_placeholder">
+                    <button class="icon-btn primary-text ai-send" id="ai-send-btn"><i class="ri-send-plane-fill"></i></button>
+                </div>
+            </div>
+
+            <!-- Add Friend Overlay -->
+            <div id="add-friend-overlay" class="overlay-view hidden">
+                <header class="app-header glass-header">
+                    <div class="header-left">
+                        <button class="icon-btn" onclick="closeOverlay('add-friend-overlay')"><i class="ri-arrow-left-line"></i></button>
+                        <h3>Add New Friend</h3>
+                    </div>
+                </header>
+                <div class="views-container list-view" style="padding: 20px;">
+                    <div class="mode-toggle-container glass-panel">
+                        <div class="mode-toggle">
+                            <input type="radio" id="mode-private" name="friend-mode" value="private" checked>
+                            <label for="mode-private" class="mode-label"><i class="ri-lock-line"></i> Private</label>
+                            
+                            <input type="radio" id="mode-public" name="friend-mode" value="public">
+                            <label for="mode-public" class="mode-label"><i class="ri-global-line"></i> Public</label>
+                            <div class="mode-slider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="search-box glass-panel">
+                        <i class="ri-search-line"></i>
+                        <input type="text" placeholder="Search by name or college ID...">
+                    </div>
+                    
+                    <div class="scan-qr-section glass-panel">
+                        <div class="qr-icon-wrapper glow-effect">
+                            <i class="ri-qr-code-line"></i>
+                        </div>
+                        <h4>Scan QR Code</h4>
+                        <p class="text-secondary" style="font-size:13px; margin-top:5px; text-align:center;">Connect instantly by scanning your friend's unique code</p>
+                        <button class="btn-primary" style="margin-top: 15px;" onclick="document.getElementById('camera-input').click()"><i class="ri-camera-lens-line"></i> Open Camera</button>
+                    </div>
+                    
+                    <div class="section-title">Suggested Friends</div>
+                    <div class="list-item">
+                        <div class="avatar bg-blue">MK</div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>Manoj Kumar</h4>
+                            </div>
+                            <p class="preview">CSE 2nd Year • 12 Mutual Friends</p>
+                        </div>
+                        <button class="icon-btn primary-text"><i class="ri-user-add-line"></i></button>
+                    </div>
+                    <div class="list-item">
+                        <div class="avatar bg-purple">SR</div>
+                        <div class="item-content">
+                            <div class="item-header">
+                                <h4>Swetha Rajen</h4>
+                            </div>
+                            <p class="preview">ECE 3rd Year • 5 Mutual Friends</p>
+                        </div>
+                        <button class="icon-btn primary-text"><i class="ri-user-add-line"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
