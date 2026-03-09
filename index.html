@@ -55,26 +55,26 @@
             <!-- Views -->
             <main class="views-container">
                 
-                <!-- Home Dashboard -->
-                <section id="home-view" class="view active">
-                    <div class="section-title stagger-item" data-i18n="latest_activity">Latest Activity</div>
+                <!-- Discover Dashboard -->
+                <section id="home-view" class="view hidden">
+                    <div class="section-title stagger-item" data-i18n="latest_activity">Discover Activities</div>
                     
                     <div class="horizontal-scroll stagger-item">
-                        <div class="channel-card">
+                        <div class="channel-card glass-panel border-glow">
                             <div class="channel-icon"><i class="ri-code-box-line"></i></div>
                             <div class="channel-info">
                                 <h4>Programming</h4>
                                 <span>24 online</span>
                             </div>
                         </div>
-                        <div class="channel-card">
+                        <div class="channel-card glass-panel">
                             <div class="channel-icon"><i class="ri-film-line"></i></div>
                             <div class="channel-info">
                                 <h4>Movies & TV</h4>
                                 <span>120 online</span>
                             </div>
                         </div>
-                        <div class="channel-card">
+                        <div class="channel-card glass-panel">
                             <div class="channel-icon"><i class="ri-robot-line"></i></div>
                             <div class="channel-info">
                                 <h4>AI & Tech</h4>
@@ -83,30 +83,8 @@
                         </div>
                     </div>
 
-                    <div class="section-title">Recent Group Messages</div>
-                    <div class="list-item" onclick="openChat('CSE 3rd Year')">
-                        <div class="avatar bg-blue">C3</div>
-                        <div class="item-content">
-                            <div class="item-header">
-                                <h4>CSE 3rd Year</h4>
-                                <span class="time">10:42 AM</span>
-                            </div>
-                            <p class="preview"><strong>Rahul:</strong> Has anyone finished the OS assignment?</p>
-                        </div>
-                    </div>
-                    <div class="list-item" onclick="openChat('Project Alpha')">
-                        <div class="avatar bg-purple">PA</div>
-                        <div class="item-content">
-                            <div class="item-header">
-                                <h4>Project Alpha</h4>
-                                <span class="time">Yesterday</span>
-                            </div>
-                            <p class="preview"><strong>You:</strong> I'll upload the final doc tonight.</p>
-                        </div>
-                    </div>
-
                     <div class="section-title">Trending Confessions</div>
-                    <div class="post-card">
+                    <div class="post-card glass-panel hover-lift scale-up">
                         <div class="post-header">
                             <div class="anon-avatar"><i class="ri-ghost-smile-line"></i></div>
                             <div>
@@ -124,16 +102,60 @@
                     </div>
                 </section>
 
-                <!-- Groups View -->
-                <section id="groups-view" class="view hidden">
-                    <div class="tabs">
-                        <button class="tab active">My Groups</button>
+                <!-- Home/Chat Dashboard (Made primary/default) -->
+                <section id="groups-view" class="view active">
+                    
+                    <!-- Snapchat-Style Moments / Stories -->
+                    <div class="stories-container horizontal-scroll stagger-item" style="padding-bottom: 20px; border-bottom: 1px solid var(--border-color); margin-bottom: 20px;">
+                        <div class="story-item add-story">
+                            <div class="story-circle-wrapper">
+                                <div class="story-circle bg-card flex-center">
+                                    <i class="ri-add-line" style="font-size: 24px; color: var(--primary-color);"></i>
+                                </div>
+                            </div>
+                            <span class="story-name">Add Moment</span>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-circle-wrapper unread">
+                                <img src="https://i.pravatar.cc/100?img=12" alt="Rahul" class="story-circle">
+                            </div>
+                            <span class="story-name">Rahul</span>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-circle-wrapper unread">
+                                <img src="https://i.pravatar.cc/100?img=5" alt="Sneha" class="story-circle">
+                            </div>
+                            <span class="story-name">Sneha</span>
+                        </div>
+
+                        <div class="story-item">
+                            <div class="story-circle-wrapper read">
+                                <img src="https://i.pravatar.cc/100?img=11" alt="Alex" class="story-circle">
+                            </div>
+                            <span class="story-name">Alex</span>
+                        </div>
+                        
+                        <div class="story-item">
+                            <div class="story-circle-wrapper read">
+                                <img src="https://i.pravatar.cc/100?img=32" alt="Priya" class="story-circle">
+                            </div>
+                            <span class="story-name">Priya</span>
+                        </div>
+                    </div>
+
+                    <div class="tabs stagger-item">
+                        <button class="tab active">My Chats</button>
                         <button class="tab">Study Groups</button>
                     </div>
                     
-                    <div class="groups-list">
+                    <div class="groups-list stagger-item">
                         <div class="list-item" onclick="openChat('CSE 3rd Year')">
-                            <div class="avatar bg-blue">C3</div>
+                            <div class="avatar-wrapper">
+                                <div class="avatar bg-blue">C3</div>
+                                <span class="status-dot online"></span>
+                            </div>
                             <div class="item-content">
                                 <div class="item-header">
                                     <h4>CSE 3rd Year</h4>
@@ -143,7 +165,10 @@
                             </div>
                         </div>
                         <div class="list-item" onclick="openChat('Web Dev Club')">
-                            <div class="avatar bg-orange">WD</div>
+                            <div class="avatar-wrapper">
+                                <div class="avatar bg-orange">WD</div>
+                                <span class="status-dot offline"></span>
+                            </div>
                             <div class="item-content">
                                 <div class="item-header">
                                     <h4>Web Dev Club</h4>
@@ -286,17 +311,17 @@
                 <i class="ri-magic-fill"></i>
             </button>
 
-            <!-- Bottom Navigation -->
+            <!-- Bottom Navigation (Reordered for Chat First) -->
             <nav class="bottom-nav">
-                <a href="#" class="nav-item active" data-target="home-view">
-                    <i class="ri-home-5-line"></i>
-                    <i class="ri-home-5-fill active-icon"></i>
-                    <span data-i18n="nav_home">Home</span>
-                </a>
-                <a href="#" class="nav-item" data-target="groups-view">
+                <a href="#" class="nav-item active" data-target="groups-view">
                     <i class="ri-chat-smile-3-line"></i>
                     <i class="ri-chat-smile-3-fill active-icon"></i>
-                    <span data-i18n="nav_groups">Groups</span>
+                    <span data-i18n="nav_groups">Chats</span>
+                </a>
+                <a href="#" class="nav-item" data-target="home-view">
+                    <i class="ri-compass-3-line"></i>
+                    <i class="ri-compass-3-fill active-icon"></i>
+                    <span data-i18n="nav_home">Discover</span>
                 </a>
                 <a href="#" class="nav-item" data-target="feed-view">
                     <i class="ri-fire-line"></i>
@@ -501,6 +526,16 @@
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
+                        </div>
+                        <div class="setting-item" style="flex-direction: column; align-items: flex-start;">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <div class="setting-icon"><i class="ri-key-2-line text-success"></i></div>
+                                <div class="setting-text">
+                                    <span style="display:block; font-weight: 600;">Gemini API Key</span>
+                                    <small class="text-secondary" style="font-size:11px">For Magical AI replies</small>
+                                </div>
+                            </div>
+                            <input type="password" id="gemini-api-key" placeholder="Enter API Key here..." style="width: 100%; margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary);">
                         </div>
                         <div class="setting-item">
                             <div class="setting-icon"><i class="ri-macbook-line"></i></div>

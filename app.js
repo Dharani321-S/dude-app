@@ -1,21 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Splash Screen Logic ---
+    // --- Splash Screen & Auth Logic ---
     const splashScreen = document.getElementById('splash-screen');
     const authView = document.getElementById('auth-view');
+    const loginForm = document.getElementById('login-form');
+    const mainApp = document.getElementById('main-app');
+    
+    // Check login state
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     setTimeout(() => {
         if (splashScreen) {
             splashScreen.style.opacity = '0';
             splashScreen.style.visibility = 'hidden';
-            setTimeout(() => splashScreen.remove(), 500); // Remove from DOM after transition
+            setTimeout(() => {
+                splashScreen.remove();
+                // Direct to main app if logged in
+                if (isLoggedIn) {
+                    authView.classList.add('hidden');
+                    mainApp.classList.remove('hidden');
+                    document.getElementById('home-view').style.animation = 'none';
+                    setTimeout(() => document.getElementById('home-view').style.animation = '', 10);
+                }
+            }, 500); // Remove from DOM after transition
         }
     }, 2000); // 2 seconds splash screen
 
     // --- Authentication ---
-    const loginForm = document.getElementById('login-form');
-    const mainApp = document.getElementById('main-app');
-
     if(loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -26,6 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.opacity = '0.7';
             
             setTimeout(() => {
+                // Save login state
+                localStorage.setItem('isLoggedIn', 'true');
+                
                 authView.classList.add('hidden');
                 mainApp.classList.remove('hidden');
                 btn.textContent = originalText;
@@ -93,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
     if(logoutBtn) {
         logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('isLoggedIn');
             mainApp.classList.add('hidden');
             authView.classList.remove('hidden');
             // Reset nav to home
@@ -270,8 +285,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const aiMsgInput = document.getElementById('ai-msg-input');
     const aiSendBtn = document.getElementById('ai-send-btn');
     const aiChatMessages = document.getElementById('ai-chat-messages');
+    const geminiInput = document.getElementById('gemini-api-key');
+    
+    if (geminiInput) {
+        geminiInput.value = localStorage.getItem('geminiApiKey') || '';
+        geminiInput.addEventListener('change', (e) => {
+            localStorage.setItem('geminiApiKey', e.target.value);
+        });
+    }
 
-    window.sendAiMsg = function(textStr) {
+    window.sendAiMsg = async function(textStr) {
         const text = textStr || (aiMsgInput ? aiMsgInput.value.trim() : '');
         if (text && aiChatMessages) {
             // Add user message
@@ -299,42 +322,63 @@ document.addEventListener('DOMContentLoaded', () => {
             aiChatMessages.appendChild(typingBubble);
             aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
 
-            // Simulate AI response delay
-            setTimeout(() => {
-                typingBubble.remove();
+            const apiKey = localStorage.getItem('geminiApiKey');
+            
+            try {
+                let responseText = "I can definitely help with that! However, I'm currently running in demo mode. Try asking your campus admin for full access!";
                 
+                if (apiKey) {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: "You are a helpful, professional campus AI assistant for a college app called 'New Bonds'. You can speak English and Tanglish. Keep responses concise and friendly. User: " + text }] }]
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    if (data.candidates && data.candidates.length > 0) {
+                        responseText = data.candidates[0].content.parts[0].text;
+                    } else if (data.error) {
+                        responseText = "Error: " + data.error.message;
+                    }
+                } else {
+                     // Fallback mock responses if no API key is provided
+                     const lowerText = text.toLowerCase();
+                     if (lowerText.match(/(bro|machi|da|epdi|enna|details|sollu|nanba|machan)/)) {
+                         responseText = "Kandipa bro! Naan ungaluku help panren. Profile Settings poi Gemini API Key potta, innum smart aaguven!";
+                     } else {
+                         responseText = `You asked: "${text}". Please enter your Gemini API Key in Profile Settings to unlock magical real AI responses.`;
+                     }
+                      await new Promise(r => setTimeout(r, 1000)); // Simulate delay
+                }
+                
+                // Format text (simple markdown to HTML for bold)
+                responseText = responseText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                typingBubble.remove();
                 const responseBubble = document.createElement('div');
                 responseBubble.className = 'message-bubble received ai-msg';
-                
-                let responseText = "I can definitely help with that! However, I'm currently running in demo mode. Try asking your campus admin for full access!";
-                const lowerText = text.toLowerCase();
-                
-                // Tanglish Checks
-                if (lowerText.match(/(bro|machi|da|epdi|enna|details|sollu|nanba|machan)/)) {
-                    responseText = "Kandipa bro! Naan ungaluku help panren. Ethavathu doubt iruntha kelunga!";
-                    if (lowerText.includes('unread') || lowerText.includes('message')) {
-                        responseText = "Machi, unakaga 'Project Alpha' group la 3 unread messages iruku paaru.";
-                    } else if (lowerText.includes('study')) {
-                        responseText = "Bro, 2 active study groups iruku. Naan venum na join panni vidava?";
-                    }
-                } 
-                // English Checks
-                else {
-                    if (lowerText.includes('unread')) {
-                        responseText = "You have 3 unread messages in 'Project Alpha' about tomorrow's presentation.";
-                    } else if (lowerText.includes('study')) {
-                        responseText = "I found 2 active study groups for Data Structures right now. Want me to join one for you?";
-                    }
-                }
-
                 responseBubble.innerHTML = `
                     <span class="sender-name"><i class="ri-magic-fill"></i> Magic AI</span>
-                    <span>${responseText}</span>
+                    <span style="white-space: pre-wrap;">${responseText}</span>
                     <div class="msg-footer"><span class="msg-time">Just now</span></div>
                 `;
                 aiChatMessages.appendChild(responseBubble);
                 aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-            }, 1800);
+                
+            } catch (error) {
+                typingBubble.remove();
+                const errBubble = document.createElement('div');
+                errBubble.className = 'message-bubble received ai-msg';
+                errBubble.innerHTML = `
+                    <span class="sender-name"><i class="ri-magic-fill"></i> Magic AI</span>
+                    <span style="color: var(--danger);">Network Error: ${error.message}</span>
+                    <div class="msg-footer"><span class="msg-time">Just now</span></div>
+                `;
+                aiChatMessages.appendChild(errBubble);
+                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+            }
         }
     };
 
